@@ -1,31 +1,59 @@
+/* ===== Base ===== */
+* { box-sizing: border-box; }
 body {
   background-color: #fffaf8;
   font-family: 'Poppins', sans-serif;
   color: #444;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
-
 h1 {
   color: #d58b7c;
-  margin-top: 40px;
+  margin: 36px 0 20px;
+  font-size: 2rem;
 }
 
+/* ===== Layout: dùng Grid cho ổn định ===== */
+#menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* tự co giãn theo màn hình */
+  gap: 20px;
+  padding: 0 20px 40px;
+  max-width: 1000px;      /* giới hạn chiều rộng để nhìn gọn */
+  margin: 0 auto;
+}
+
+/* ===== Card ===== */
 .menu-item {
-  display: inline-block;
   background: #ffe9e0;
-  border-radius: 10px;
-  margin: 10px;
-  padding: 15px;
-  width: 160px;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.18s ease;
 }
+.menu-item:hover { transform: translateY(-2px); }
 
+/* ===== Hình ảnh cùng kích thước ===== */
 .menu-item img {
-  width: 100px;
-  border-radius: 10px;
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* CHỐT: ép mọi ảnh về cùng tỷ lệ 4:3 */
+  object-fit: cover;     /* cắt viền cho đều, không méo */
+  border-radius: 12px;
+  display: block;
 }
 
+/* ===== Text ===== */
 .menu-item p {
-  margin: 5px 0;
+  margin: 8px 0 0;
   font-weight: 500;
+  color: #555;
+}
+
+/* ===== Footer ===== */
+footer {
+  background-color: #fbeeea;
+  padding: 14px;
+  font-size: 0.92rem;
+  color: #a8746c;
 }
