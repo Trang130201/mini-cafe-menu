@@ -1,73 +1,187 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mini Café Menu ☕</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header><h1>🧋 Mini Café Menu</h1></header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Mini Café Menu ☕</title>
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+  </head>
+  <body>
+    <header><h1>🧋 Mini Café Menu</h1></header>
 
-  <section id="menu"></section>
+    <section id="menu"></section>
 
-  <!-- BẢNG TUỲ CHỌN / PHỤ THÊM -->
-  <section class="extras-wrap">
-    <h2 class="extras-title">Tuỳ chọn thêm</h2>
-    <table class="extras-table">
-      <thead>
-        <tr><th>Hạng mục</th><th>Mô tả</th><th>Phụ phí</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Upsize</td><td>Tăng dung tích mỗi ly</td><td>+10k / ly</td></tr>
-        <tr><td>Lượng đường</td><td>0% • 30% • 50% • 70% • 100%</td><td>0k</td></tr>
-        <tr><td>Thêm matcha</td><td>+ 1 shot bột matcha</td><td>+5k</td></tr>
-        <tr><td>Thêm dâu</td><td>+ 1 phần mứt/miếng dâu</td><td>+15k</td></tr>
-      </tbody>
-    </table>
-  </section>
+    <!-- BẢNG TUỲ CHỌN / PHỤ THÊM -->
+    <section class="extras-wrap">
+      <h2 class="extras-title">Tuỳ chọn thêm</h2>
+      <table class="extras-table">
+        <thead>
+          <tr>
+            <th>Hạng mục</th>
+            <th>Mô tả</th>
+            <th>Phụ phí</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Upsize</td>
+            <td>Tăng dung tích mỗi ly</td>
+            <td>+10k / ly</td>
+          </tr>
+          <tr>
+            <td>Lượng đường</td>
+            <td>0% • 30% • 50% • 70% • 100%</td>
+            <td>0k</td>
+          </tr>
+          <tr>
+            <td>Thêm matcha</td>
+            <td>+ 1 shot bột matcha</td>
+            <td>+5k</td>
+          </tr>
+          <tr>
+            <td>Thêm dâu</td>
+            <td>+ 1 phần mứt/miếng dâu</td>
+            <td>+15k</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-  <!-- MODAL SẢN PHẨM -->
-  <div id="product-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal__overlay" data-close="true"></div>
-    <div class="modal__dialog" role="document">
-      <button class="modal__close" aria-label="Đóng" data-close="true">×</button>
+    <!-- MODAL SẢN PHẨM -->
+    <div
+      id="product-modal"
+      class="modal hidden"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="modal__overlay"
+        data-close="true"
+      ></div>
+      <div
+        class="modal__dialog"
+        role="document"
+      >
+        <button
+          class="modal__close"
+          aria-label="Đóng"
+          data-close="true"
+        >
+          ×
+        </button>
 
-      <h2 class="modal__title">Sản phẩm</h2>
-      <div id="product-list" class="product-grid"></div>
+        <h2 class="modal__title">Sản phẩm</h2>
+        <div
+          id="product-list"
+          class="product-grid"
+        ></div>
 
-      <!-- PANEL TÍNH TIỀN -->
-      <div class="calc-panel">
-        <h3 class="calc-title">Tính giá</h3>
-        <div class="calc-picked">
-          <span class="calc-picked__label">Đã chọn:</span>
-          <span id="picked-name" class="calc-picked__name">—</span>
-          <span id="picked-base" class="calc-picked__base">0k</span>
-        </div>
-
-        <div class="calc-options">
-          <label class="opt"><input type="checkbox" id="opt-upsize" /> Upsize (+10k)</label>
-          <div class="opt opt-sugar">
-            <span>Đường:</span>
-            <label><input type="radio" name="sugar" value="0" checked /> 0%</label>
-            <label><input type="radio" name="sugar" value="30" /> 30%</label>
-            <label><input type="radio" name="sugar" value="50" /> 50%</label>
-            <label><input type="radio" name="sugar" value="70" /> 70%</label>
-            <label><input type="radio" name="sugar" value="100" /> 100%</label>
+        <!-- PANEL TÍNH TIỀN -->
+        <div class="calc-panel">
+          <h3 class="calc-title">Tính giá</h3>
+          <div class="calc-picked">
+            <span class="calc-picked__label">Đã chọn:</span>
+            <span
+              id="picked-name"
+              class="calc-picked__name"
+              >—</span
+            >
+            <span
+              id="picked-base"
+              class="calc-picked__base"
+              >0k</span
+            >
           </div>
-          <label class="opt"><input type="checkbox" id="opt-add-matcha" /> Thêm matcha (+5k)</label>
-          <label class="opt"><input type="checkbox" id="opt-add-strawberry" /> Thêm dâu (+15k)</label>
-        </div>
+
+          <div class="calc-options">
+            <label class="opt"
+              ><input
+                type="checkbox"
+                id="opt-upsize"
+              />
+              Upsize (+10k)</label
+            >
+            <div class="opt opt-sugar">
+              <span>Đường:</span>
+              <label
+                ><input
+                  type="radio"
+                  name="sugar"
+                  value="0"
+                  checked
+                />
+                0%</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="sugar"
+                  value="30"
+                />
+                30%</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="sugar"
+                  value="50"
+                />
+                50%</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="sugar"
+                  value="70"
+                />
+                70%</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="sugar"
+                  value="100"
+                />
+                100%</label
+              >
+            </div>
+            <label class="opt"
+              ><input
+                type="checkbox"
+                id="opt-add-matcha"
+              />
+              Thêm matcha (+5k)</label
+            >
+            <label class="opt"
+              ><input
+                type="checkbox"
+                id="opt-add-strawberry"
+              />
+              Thêm dâu (+15k)</label
+            >
+          </div>
 
         <div class="calc-total">
           <span>Tạm tính:</span>
           <strong id="total-amount">0k</strong>
         </div>
 
-        <button id="add-to-cart" class="add-btn">🛒 Thêm vào giỏ</button>
+          <button
+            id="add-to-cart"
+            class="add-btn"
+          >
+            🛒 Thêm vào giỏ
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
   <!-- 🛒 NÚT GIỎ HÀNG NỔI -->
   <button id="cart-fab" class="cart-fab" aria-label="Mở giỏ hàng">
@@ -102,10 +216,9 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <footer><p>Made with 💖 by A Nhí & Friends</p></footer>
+    <footer><p>Made with 💖 by A Nhí & A Nhố</p></footer>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
