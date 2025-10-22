@@ -60,7 +60,7 @@
         </div>
 
         <div class="calc-total">
-          <span>Tổng:</span>
+          <span>Tạm tính:</span>
           <strong id="total-amount">0k</strong>
         </div>
 
@@ -69,13 +69,38 @@
     </div>
   </div>
 
-  <!-- 🛒 GIỎ HÀNG MINI -->
-  <div id="mini-cart" class="cart hidden">
-    <h3>🛒 Giỏ hàng</h3>
-    <ul id="cart-items"></ul>
-    <div class="cart-footer">
-      <span>Tổng cộng:</span>
-      <strong id="cart-total">0k</strong>
+  <!-- 🛒 NÚT GIỎ HÀNG NỔI -->
+  <button id="cart-fab" class="cart-fab" aria-label="Mở giỏ hàng">
+    🛒 <span id="cart-count" class="cart-badge">0</span>
+  </button>
+
+  <!-- 🛒 MODAL GIỎ HÀNG CHI TIẾT -->
+  <div id="cart-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__overlay" data-close="true"></div>
+    <div class="modal__dialog" role="document">
+      <button class="modal__close" aria-label="Đóng" data-close="true">×</button>
+
+      <h2 class="modal__title">Giỏ hàng</h2>
+      <div id="cart-detail" class="cart-detail">
+        <ul id="cart-items"></ul>
+
+        <div class="cart-summary">
+          <div><span>Subtotal:</span><strong id="sum-subtotal">0k</strong></div>
+          <div><span>Giảm giá:</span><strong id="sum-discount">0k</strong></div>
+          <div><span>Phí ship:</span><strong id="sum-shipping">0k</strong></div>
+          <div class="grand"><span>Tổng thanh toán:</span><strong id="sum-grand">0k</strong></div>
+        </div>
+
+        <div class="shop-loc">
+          <p><strong>🏪 Địa chỉ shop:</strong> 18 Nguyễn An Ninh, Phường 7, TP. Vũng Tàu</p>
+          <p id="distance-line">📍 Khoảng cách của bạn: <em>chưa xác định</em></p>
+          <div class="loc-actions">
+            <button id="btn-get-location" class="loc-btn">Lấy vị trí của tôi</button>
+            <button id="btn-checkout" class="pay-btn">Tiến tới thanh toán</button>
+          </div>
+          <p class="loc-note">Vui lòng bật quyền vị trí trên trình duyệt để tính phí ship chính xác.</p>
+        </div>
+      </div>
     </div>
   </div>
 
