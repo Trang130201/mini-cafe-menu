@@ -1,59 +1,117 @@
-/* ===== Base ===== */
-* { box-sizing: border-box; }
+/* ===== Reset & Base ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
   background-color: #fffaf8;
-  font-family: 'Poppins', sans-serif;
-  color: #444;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-h1 {
-  color: #d58b7c;
-  margin: 36px 0 20px;
-  font-size: 2rem;
+  font-family: 'Poppins', system-ui, -apple-system, Arial, sans-serif;
+  color: #444; text-align: center;
 }
 
-/* ===== Layout: dùng Grid cho ổn định ===== */
+h1 { color: #d58b7c; margin: 20px 0 14px; font-size: 1.2rem; }
+
+/* ===== Menu Grid ===== */
 #menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* tự co giãn theo màn hình */
-  gap: 20px;
-  padding: 0 20px 40px;
-  max-width: 1000px;      /* giới hạn chiều rộng để nhìn gọn */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 0 10px 20px;
+  max-width: 380px;
   margin: 0 auto;
 }
 
 /* ===== Card ===== */
 .menu-item {
   background: #ffe9e0;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.08);
-  transition: transform 0.18s ease;
-}
-.menu-item:hover { transform: translateY(-2px); }
-
-/* ===== Hình ảnh cùng kích thước ===== */
-.menu-item img {
-  width: 100%;
-  aspect-ratio: 4 / 3;   /* CHỐT: ép mọi ảnh về cùng tỷ lệ 4:3 */
-  object-fit: cover;     /* cắt viền cho đều, không méo */
   border-radius: 12px;
-  display: block;
+  box-shadow: 2px 2px 8px rgba(0,0,0,.08);
+  padding: 10px;
+  transition: transform .18s ease, box-shadow .18s ease;
+  width: 170px; cursor: pointer;
+}
+.menu-item:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(0,0,0,.10); }
+
+.title {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-bottom: 6px; color: #4b4b4b; font-weight: 600; font-size: .9rem;
+}
+.icon-emoji { font-size: 1.1rem; line-height: 1; }
+
+/* Khung ảnh trong card (lọt gọn) */
+.media { width: 100%; height: 100px; margin: 4px 0 6px; position: relative; }
+.drink-photo {
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  background: #fff; border-radius: 8px; display: block;
+  transition: filter .2s ease, box-shadow .2s ease;
 }
 
-/* ===== Text ===== */
-.menu-item p {
-  margin: 8px 0 0;
-  font-weight: 500;
-  color: #555;
+/* Glow màu pastel khi hover card (nhẹ mắt, không nhấp nháy tự động) */
+.menu-item { --glow: rgba(213,139,124,.45); }
+.menu-item[data-flavor="matcha"] { --glow: rgba(120,190,120,.55); }
+.menu-item[data-flavor="strawberry"] { --glow: rgba(255,120,160,.55); }
+.menu-item:hover .drink-photo { box-shadow: 0 0 12px var(--glow); filter: brightness(1.06); }
+
+.meta { margin-top: 2px; font-size: .82rem; color: #5a5a5a; }
+
+footer { background: #fbeeea; padding: 10px; font-size: .78rem; color: #a8746c; }
+
+/* ===== Modal ===== */
+.modal.hidden { display: none; }
+.modal { position: fixed; inset: 0; z-index: 50; }
+
+.modal__overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(1px);
 }
 
-/* ===== Footer ===== */
-footer {
-  background-color: #fbeeea;
-  padding: 14px;
-  font-size: 0.92rem;
-  color: #a8746c;
+.modal__dialog {
+  position: relative;
+  width: min(92vw, 720px);
+  margin: 6vh auto;
+  background: #fffaf8;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  padding: 18px 16px 20px;
+  border: 2px solid #ffd9cf;
+}
+
+.modal__title {
+  color: #d58b7c; font-size: 1.1rem; margin-bottom: 12px;
+}
+
+.modal__close {
+  position: absolute; top: 8px; right: 10px;
+  width: 32px; height: 32px; border: none; border-radius: 50%;
+  background: #ffe9e0; color: #a45d52; font-size: 18px; cursor: pointer;
+}
+.modal__close:hover { background: #ffd9cf; }
+
+/* Lưới sản phẩm trong modal */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.product-card {
+  background: #fff; border: 1px solid #ffe1d8;
+  border-radius: 12px; padding: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+.product-card__img {
+  width: 100%; height: 140px;
+  object-fit: contain; object-position: center;
+  background: #fff; border-radius: 10px; display: block;
+  margin-bottom: 6px;
+}
+
+.product-card__name {
+  font-size: .9rem; font-weight: 600; color: #555;
+}
+
+/* Mobile */
+@media (max-width: 400px) {
+  #menu { grid-template-columns: 1fr; max-width: 200px; }
 }

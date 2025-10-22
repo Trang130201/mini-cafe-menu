@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Café Menu</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Café Menu ☕</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>☕ Mini Café Menu</h1>
-  </header>
+  <header><h1>🧋 Mini Café Menu</h1></header>
 
   <section id="menu"></section>
-  <img src="images/matcha.jpg" alt="Matcha Latte" class="menu-image"/>
-  <img src="images/strawberries.jpg" alt="strawberries" class="menu-image"/>
 
-  <footer>
-    <p>Made with 💖 by A Nhí & Friends</p>
-  </footer>
+  <!-- Modal hiển thị danh sách sản phẩm của từng menu -->
+  <div id="product-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__overlay" data-close="true"></div>
+    <div class="modal__dialog" role="document">
+      <button class="modal__close" aria-label="Đóng" data-close="true">×</button>
+      <h2 class="modal__title">Sản phẩm</h2>
+      <div id="product-list" class="product-grid"></div>
+    </div>
+  </div>
+
+  <footer><p>Made with 💖 by A Nhí & Friends</p></footer>
 
   <script src="script.js"></script>
 </body>
