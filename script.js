@@ -82,6 +82,29 @@
   const btnCheckout = document.getElementById("btn-checkout");
   const distanceLine = document.getElementById("distance-line");
 
+  /* ===== Topping wrappers (ẩn/hiện đúng phần) ===== */
+  const addMatchaInput = optAddMatcha; // id="opt-add-matcha"
+  const addStrawberryInput = optAddStrawberry; // id="opt-add-strawberry"
+  const addMatchaWrap = addMatchaInput.closest("label");
+  const addStrawberryWrap = addStrawberryInput.closest("label");
+
+  function toggleToppingsForFlavor(flavor) {
+    if (flavor === "matcha") {
+      addMatchaWrap.style.display = "inline-flex";
+      addStrawberryWrap.style.display = "none";
+      if (addStrawberryInput.checked) addStrawberryInput.checked = false;
+    } else if (flavor === "strawberry") {
+      addMatchaWrap.style.display = "none";
+      addStrawberryWrap.style.display = "inline-flex";
+      if (addMatchaInput.checked) addMatchaInput.checked = false;
+    } else {
+      addMatchaWrap.style.display = "none";
+      addStrawberryWrap.style.display = "none";
+      addMatchaInput.checked = false;
+      addStrawberryInput.checked = false;
+    }
+  }
+
   /* ===== State ===== */
   let currentProduct = null;
   let cart = [];
@@ -129,13 +152,17 @@
 
     pickProduct(drink.products[0]);
     resetOptions();
+
+    // ẨN/HIỆN topping theo nhóm hương vị (quan trọng)
+    toggleToppingsForFlavor(drink.flavor);
+
     updateTempTotal();
 
     modalEl.classList.remove("hidden");
     modalEl.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
-    // Delegation: chọn sản phẩm
+    // Delegation: chọn sản phẩm trong modal
     productListEl.onclick = (e) => {
       const card = e.target.closest(".product-card");
       if (!card) return;
@@ -246,6 +273,7 @@
         `;
       }).join("");
     }
+
     // Tính tạm
     const subtotal = cart.reduce((s, c) => s + c.total, 0);
     sumSubtotalEl.textContent = fmtK(subtotal);
@@ -283,18 +311,15 @@
   });
 
   btnCheckout.addEventListener("click", () => {
-    // Subtotal
     const subtotal = cart.reduce((s, c) => s + c.total, 0);
 
-    // Discount: >=200k => -5%; >=300k => -5% & freeship (shipping=0)
+    // Discount: >=200k => -5%; >=300k => -5% & freeship
     let discount = 0;
-    if (subtotal >= 300) {
-      discount = Math.round(subtotal * 0.05);
-    } else if (subtotal >= 200) {
+    if (subtotal >= 200) {
       discount = Math.round(subtotal * 0.05);
     }
 
-    // Shipping theo khoảng cách hoặc freeship theo điều kiện
+    // Shipping theo khoảng cách
     let shipping = 0;
     let km = null;
     if (userLoc) {
@@ -304,14 +329,12 @@
       else if (km >= 6 && km <= 12) shipping = 40;
       else if (km !== null) shipping = 40; // >12km tạm tính 40k
     } else {
-      // Chưa có vị trí → nhắc người dùng
       distanceLine.innerHTML = `📍 Chưa có vị trí khách. Nhấn "Lấy vị trí của tôi" để tính ship chính xác.`;
     }
 
     // Nếu subtotal >= 300k => freeship
     if (subtotal >= 300) shipping = 0;
 
-    // Tổng
     const grand = Math.max(0, subtotal - discount) + shipping;
 
     sumSubtotalEl.textContent = fmtK(subtotal);
