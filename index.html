@@ -3,36 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mini Café Menu</title>
+  <title>Mini Café Menu — Pastel</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
-    <h1>Mini Café Menu</h1>
-    <div class="promo-banner" role="note" aria-live="polite">
-      <strong>Khuyến mãi:</strong> Đơn ≥ 200.000₫ giảm 5% • Đơn ≥ 300.000₫ <u>freeship</u>
+    <div class="brand">
+      <img src="images/logo.png" alt="Mini Café" onerror="this.style.display='none'"/>
+      <h1>Mini Café Menu</h1>
     </div>
+    <p class="promo-banner" role="note" aria-live="polite">
+      <strong>Ưu đãi:</strong> Đơn ≥ 200.000₫ giảm 5% • Đơn ≥ 300.000₫ <u>freeship</u>
+    </p>
   </header>
 
   <main class="container">
     <!-- Định vị & phí ship -->
-    <section class="shipping-card" aria-labelledby="ship-title">
-      <div class="ship-row">
+    <section class="card shipping" aria-labelledby="ship-title">
+      <div class="row">
         <h2 id="ship-title">Định vị &amp; phí ship</h2>
         <button id="locateBtn" class="btn">Định vị (Geolocation)</button>
       </div>
-      <p class="ship-note">
+      <p class="hint">
         Quy tắc: 1–3km: miễn phí • &gt;3–&lt;6km: 20.000₫ • 6–12km: 40.000₫ • &gt;12km: 40.000₫
       </p>
-      <div class="ship-info">
-        <span>Khoảng cách ước tính: <strong id="distanceText">—</strong></span>
-        <span>Phí ship dự kiến: <strong id="shippingFeeText">—</strong></span>
+      <div class="pillbox">
+        <span>Khoảng cách: <strong id="distanceText">—</strong></span>
+        <span>Phí ship: <strong id="shippingFeeText">—</strong></span>
       </div>
     </section>
 
-    <!-- Sản phẩm -->
+    <!-- Danh mục -->
     <section>
-      <h2>Thức uống nổi bật</h2>
+      <h2 class="section-title">Thức uống nổi bật</h2>
       <div id="productGrid" class="grid"></div>
     </section>
   </main>
@@ -45,15 +48,16 @@
   <!-- Modal giỏ hàng -->
   <div id="cartModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="cartTitle">
     <div class="modal-content">
-      <button class="modal-close" data-close>&times;</button>
+      <button class="modal-close" data-close aria-label="Đóng">&times;</button>
       <h3 id="cartTitle">Giỏ hàng</h3>
+
       <div id="cartItems" class="cart-items"></div>
 
       <div class="summary">
-        <div class="summary-row"><span>Tạm tính</span><span id="subtotalText">0₫</span></div>
-        <div class="summary-row"><span>Giảm giá</span><span id="discountText">0₫</span></div>
-        <div class="summary-row"><span>Phí ship</span><span id="shippingText">—</span></div>
-        <div class="summary-row total"><span>Tổng cộng</span><span id="totalText">0₫</span></div>
+        <div class="row"><span>Tạm tính</span><span id="subtotalText">0₫</span></div>
+        <div class="row"><span>Giảm giá</span><span id="discountText">0₫</span></div>
+        <div class="row"><span>Phí ship</span><span id="shippingText">—</span></div>
+        <div class="row total"><span>Tổng cộng</span><span id="totalText">0₫</span></div>
       </div>
 
       <div class="actions">
@@ -63,10 +67,10 @@
     </div>
   </div>
 
-  <!-- Modal Thanh toán -->
+  <!-- Modal thanh toán -->
   <div id="paymentModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="payTitle">
     <div class="modal-content">
-      <button class="modal-close" data-close>&times;</button>
+      <button class="modal-close" data-close aria-label="Đóng">&times;</button>
       <h3 id="payTitle">Chọn phương thức thanh toán</h3>
 
       <form id="paymentForm" class="payment-form">
@@ -85,7 +89,7 @@
 
         <div id="qrBlock" class="qr-block" hidden>
           <img src="images/qr.png" alt="Mã QR thanh toán" />
-          <p class="qr-note">Quét mã để thanh toán. Vui lòng ghi nội dung: <em>MiniCafe - SĐT</em>.</p>
+          <p class="qr-note">Quét mã để thanh toán. Nội dung chuyển khoản: <em>MiniCafe - SĐT</em>.</p>
         </div>
 
         <div class="actions">
@@ -96,17 +100,17 @@
     </div>
   </div>
 
-  <!-- Nhạc nền: tự phát (muted) để qua chính sách autoplay -->
-  <div class="audio-bar">
-    <button id="audioToggle" class="btn btn-ghost" aria-pressed="false" aria-label="Bật/Tắt tiếng">🔈 Bật tiếng</button>
-    <audio id="bgm" preload="auto" autoplay muted loop>
+  <!-- Nhạc nền: KHÔNG tự phát (đúng spec); có nút play/pause -->
+  <div class="audio-bar" aria-label="Trình phát nhạc nền">
+    <button id="audioToggle" class="btn btn-ghost" aria-pressed="false">▶️ Phát nhạc</button>
+    <audio id="bgm" preload="none">
       <source src="audio/bgm.mp3" type="audio/mpeg" />
     </audio>
-    <span id="audioStatus" class="audio-status">Đang phát (đang tắt tiếng)</span>
+    <span id="audioStatus" class="audio-status">Chưa phát</span>
   </div>
 
   <footer class="site-footer">
-    <small>© 2025 Mini Café</small>
+    <small>© 2025 Mini Café · Pastel UI</small>
   </footer>
 
   <script src="script.js"></script>
